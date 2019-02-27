@@ -1,0 +1,121 @@
+<div class="row" *ngFor="let sensordata of sensorsdata">
+
+  
+  <div class="col">
+      <table class="history">
+          <tr>
+              <td class="value">Dioxid de Carbon</td> 
+            <td class="spark" >
+                <kendo-sparkline [data]="CO2_array" type="column">
+                  </kendo-sparkline>
+            </td>
+            <td class="value">{{sensordata.CO2}}<span>ppm</span></td>
+          </tr>
+          <tr>
+              <td class="value">Monoxid de Carbon</td> 
+            <td class="spark">
+                <kendo-sparkline [data]="CO_array" type="column">
+                  </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.CO}}<span>ppm</span></td>
+            </tr>
+            <tr>
+                <td class="value">Temperatura</td> 
+                <td class="spark">
+                    <kendo-sparkline [data]="TEMP_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.temp}}<span>C</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Presiune</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="PRESS_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{PRESS_mmhg}}<span>mmHg</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Umiditate</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="HUM_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.hum}}<span>%</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Monoxid de Azot</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="NO_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.NO}}<span>ppm</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Dioxid de Azot</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="NO2_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.NO2}}<span>ppm</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Dioxid de Sulf</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="SO2_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.SO2}}<span>ppm</span></td>
+              </tr>
+        </table>
+      
+  </div>
+
+  <mat-grid-list [cols]="mobileQuery.matches ? '2' : '3'" rowHeight="3:2" *ngFor="let sensordata of sensorsdata">
+      <mat-grid-tile>
+        <kendo-arcgauge [value]="sensordata.CO" [scale]="{ max: 10 }" [colors]="CO_colors" >
+          <ng-template kendoArcGaugeCenterTemplate let-value="value">
+              {{ sensordata.CO }} <span>ppm</span>
+          </ng-template>
+      </kendo-arcgauge>
+    </mat-grid-tile>
+    
+      <mat-grid-tile>
+          <kendo-arcgauge [value]="sensordata.NO" [scale]="{ max: 0.4 }" [colors]="NO2_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.NO }} <span>ppm</span>
+              </ng-template>
+          </kendo-arcgauge>
+          
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+          <kendo-arcgauge [value]="sensordata.NO2" [scale]="{ max: 0.6 }" [colors]="NO2_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.NO2 }} <span>ppm</span>
+              </ng-template>
+          </kendo-arcgauge>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <kendo-arcgauge [value]="sensordata.SO2" [scale]="{ max: 0.3 }" [colors]="SO2_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.SO2 }} <span>ppm</span>
+              </ng-template>
+          </kendo-arcgauge>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <kendo-arcgauge [value]="sensordata.CO2" [scale]="{ max: 500 }" [colors]="CO2_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.CO2 }} <span>ppm</span>
+              </ng-template>
+          </kendo-arcgauge>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <kendo-arcgauge [value]="sensordata.O3" [scale]="{ max: 0.1 }" [colors]="O3_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.O3 }} <span>ppm</span>
+              </ng-template>
+          </kendo-arcgauge>
+      </mat-grid-tile>
+    </mat-grid-list>
+</div>

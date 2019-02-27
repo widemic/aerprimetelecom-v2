@@ -1,0 +1,325 @@
+<mat-sidenav-container class="sidenav-container"  autosize>
+  <mat-sidenav #drawer class="sidenav"
+      attr.role="dialog"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      opened="true"
+      position="end"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
+      >
+      
+    <mat-toolbar>
+        <button mat-button (click)="drawer.toggle()"><mat-icon>home</mat-icon></button>
+      <span class="title-center">Grafice si Indicatori</span>
+    </mat-toolbar>
+    <app-details></app-details>
+    <!-- <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list> -->
+
+    <!-- gauges here -->
+    <!-- <div class="row" *ngFor="let sensordata of sensorsdata">
+
+      <div class="col">
+          <table class="history">
+              <tr>
+                  <td class="value">Dioxid de Carbon</td> 
+                <td class="spark" >
+                    <kendo-sparkline [data]="CO2_array" type="column">
+                      </kendo-sparkline>
+                </td>
+                <td class="value">{{sensordata.CO2}}<span>ppm</span></td>
+              </tr>
+              <tr>
+                  <td class="value">Monoxid de Carbon</td> 
+                <td class="spark">
+                    <kendo-sparkline [data]="CO_array" type="column">
+                      </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.CO}}<span>ppm</span></td>
+                </tr>
+                <tr>
+                    <td class="value">Temperatura</td> 
+                    <td class="spark">
+                        <kendo-sparkline [data]="TEMP_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.temp}}<span>C</span></td>
+                  </tr>
+                  <tr>
+                      <td class="value">Presiune</td> 
+                    <td class="spark" >
+                        <kendo-sparkline [data]="PRESS_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{PRESS_mmhg}}<span>mmHg</span></td>
+                  </tr>
+                  <tr>
+                      <td class="value">Umiditate</td> 
+                    <td class="spark" >
+                        <kendo-sparkline [data]="HUM_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.hum}}<span>%</span></td>
+                  </tr>
+                  <tr>
+                      <td class="value">Monoxid de Azot</td> 
+                    <td class="spark" >
+                        <kendo-sparkline [data]="NO_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.NO}}<span>ppm</span></td>
+                  </tr>
+                  <tr>
+                      <td class="value">Dioxid de Azot</td> 
+                    <td class="spark" >
+                        <kendo-sparkline [data]="NO2_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.NO2}}<span>ppm</span></td>
+                  </tr>
+                  <tr>
+                      <td class="value">Dioxid de Sulf</td> 
+                    <td class="spark" >
+                        <kendo-sparkline [data]="SO2_array" type="column">
+                          </kendo-sparkline>
+                    </td>
+                    <td class="value">{{sensordata.SO2}}<span>ppm</span></td>
+                  </tr>
+            </table>
+          
+      </div>
+
+      <mat-grid-list [cols]="mobileQuery.matches ? '2' : '3'" rowHeight="2:1.2" *ngFor="let sensordata of sensorsdata">
+          <mat-grid-tile>
+            <kendo-arcgauge [value]="sensordata.CO" [scale]="{ max: 10 }" [colors]="CO_colors" >
+              <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                  {{ sensordata.CO }} <span>ppm</span>
+              </ng-template>
+              
+          </kendo-arcgauge>
+          
+        </mat-grid-tile>
+        
+          <mat-grid-tile>
+              <kendo-arcgauge [value]="sensordata.NO" [scale]="{ max: 0.4 }" [colors]="NO2_colors" >
+                  <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                      {{ sensordata.NO }} <span>ppm</span>
+                  </ng-template>
+              </kendo-arcgauge>
+              
+          </mat-grid-tile>
+          
+          <mat-grid-tile>
+              <kendo-arcgauge [value]="sensordata.NO2" [scale]="{ max: 0.6 }" [colors]="NO2_colors" >
+                  <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                      {{ sensordata.NO2 }} <span>ppm</span>
+                  </ng-template>
+              </kendo-arcgauge>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <kendo-arcgauge [value]="sensordata.SO2" [scale]="{ max: 0.3 }" [colors]="SO2_colors" >
+                  <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                      {{ sensordata.SO2 }} <span>ppm</span>
+                  </ng-template>
+              </kendo-arcgauge>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <kendo-arcgauge [value]="sensordata.CO2" [scale]="{ max: 500 }" [colors]="CO2_colors" >
+                  <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                      {{ sensordata.CO2 }} <span>ppm</span>
+                  </ng-template>
+              </kendo-arcgauge>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <kendo-arcgauge [value]="sensordata.O3" [scale]="{ max: 0.1 }" [colors]="O3_colors" >
+                  <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                      {{ sensordata.O3 }} <span>ppm</span>
+                  </ng-template>
+              </kendo-arcgauge>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      <table class="live" *ngFor="let sensordata of sensorsdata">
+          <tr>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.CO" [scale]="{ max: 10 }" [colors]="CO_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.CO }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.NO" [scale]="{ max: 0.4 }" [colors]="NO2_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.NO }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.NO2" [scale]="{ max: 0.6 }" [colors]="NO2_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.NO2 }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+          </tr>
+          <tr>
+              <td class="value">Monoxid de Carbon</td>
+              <td class="value">Monoxid de Azot</td>
+              <td class="value">Dioxid de Azon</td>
+          </tr>
+          <tr>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.SO2" [scale]="{ max: 0.3 }" [colors]="SO2_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.SO2 }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.CO2" [scale]="{ max: 500 }" [colors]="CO2_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.CO2 }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+            <td class="gauge" >
+                <kendo-arcgauge [value]="sensordata.O3" [scale]="{ max: 0.1 }" [colors]="O3_colors" >
+                    <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                        {{ sensordata.O3 }} <span>ppm</span>
+                    </ng-template>
+                </kendo-arcgauge>
+            </td>
+          </tr>
+          <tr>
+              <td class="value">Dioxid de Sulf</td>
+              <td class="value">Dioxid de Azot</td>
+              <td class="value">Ozon</td>
+          </tr>
+
+      </table> -->
+<!--       
+      <div class="col" *ngFor="let sensordata of sensorsdata">
+
+        <kendo-arcgauge [value]="sensordata.CO" [scale]="{ max: 10 }" [colors]="CO_colors" style="height: 100px; ">
+  
+          <ng-template kendoArcGaugeCenterTemplate let-value="value">
+              {{ sensordata.CO }}
+          </ng-template>
+          
+      </kendo-arcgauge>
+
+      <kendo-arcgauge [value]="32" [scale]="{ max: 100 }" [colors]="CO_colors" style="height: 100px; ">
+        <ng-template kendoArcGaugeCenterTemplate let-value="value">
+            {{ value }}%
+            <span class="title-center">CO2</span>
+        </ng-template>
+        
+    </kendo-arcgauge>
+    <kendo-arcgauge [value]="32" [scale]="{ max: 100 }" [colors]="CO_colors" style="height: 100px; ">
+        <ng-template kendoArcGaugeCenterTemplate let-value="value">
+            {{ value }}%
+            <span class="title-center">CO2</span>
+        </ng-template>
+        
+    </kendo-arcgauge>
+
+      </div>
+      <div class="col-sm-12 col-md-5">
+
+        <kendo-arcgauge [value]="32" [scale]="{ max: 100 }">
+          <ng-template kendoArcGaugeCenterTemplate let-value="value">
+              {{ value }}%
+          </ng-template>
+      </kendo-arcgauge>
+
+      <kendo-arcgauge [value]="32" [scale]="{ max: 100 }">
+          <ng-template kendoArcGaugeCenterTemplate let-value="value">
+              {{ value }}%
+          </ng-template>
+      </kendo-arcgauge>
+
+      </div>
+    </div>
+    <div *ngFor="let sensordata of sensorsdata">
+
+        <kendo-arcgauge [value]="sensordata.CO2" [scale]="{ max: 1000 }">
+            <ng-template kendoArcGaugeCenterTemplate let-value="value">
+                {{ sensordata.CO2 }}%
+            </ng-template>
+        </kendo-arcgauge>
+
+    </div>
+     
+  </div>
+-->
+   
+
+<!-- 
+  <kendo-chart>
+    <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item
+            [categories]="['Jan', 'Feb', 'Mar', 'Apr']">
+        </kendo-chart-category-axis-item>
+    </kendo-chart-category-axis>
+    <kendo-chart-series>
+      <kendo-chart-series-item type="line" [data]="CO2_array">
+      </kendo-chart-series-item>
+      <kendo-chart-series-item type="line" [data]="CO_array">
+      </kendo-chart-series-item>
+      <kendo-chart-series-item type="line" [data]="TEMP_array">
+        </kendo-chart-series-item>
+        <kendo-chart-series-item type="line" [data]="HUM_array">
+        </kendo-chart-series-item>
+         <kendo-chart-series-item type="line" [data]="PRESS_array">
+          </kendo-chart-series-item> 
+          <kendo-chart-series-item type="line" [data]="NO2_array">
+          </kendo-chart-series-item>
+          <kendo-chart-series-item type="line" [data]="NO_array">
+            </kendo-chart-series-item>
+            <kendo-chart-series-item type="line" [data]="SO2_array">
+            </kendo-chart-series-item>
+    </kendo-chart-series>
+  </kendo-chart>
+  -->
+
+  </mat-sidenav>
+
+    <agm-map #map [mapTypeId]="'terrain'" [latitude]="lat" [longitude]="lng" style="bottom: 0;height: 90vh;" [zoom]="12" >
+      <agm-circle
+      (circleClick)="clickedCircle(1)"
+      [latitude]="lat"
+      [longitude]="lng"
+      [circleDraggable]="false"
+      [editable]="false"
+      fillColor="green" 
+      [fillOpacity]="0.4"
+      [radius]="1000"
+      
+      ></agm-circle>
+    </agm-map>
+
+
+
+</mat-sidenav-container>
+
+
+<mat-toolbar color="primary">
+<!-- 
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    >
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+   -->
+  <span>Aer PrimeTelecom</span>
+</mat-toolbar>
+
+<!-- <agm-map #map [mapTypeId]="'terrain'" [latitude]="lat" [longitude]="lng" style="bottom: 0;height: 90vh;"  >
+  <agm-marker [latitude]="lat" [longitude]="lng" (markerClick)="drawer.toggle()"></agm-marker>
+</agm-map> -->

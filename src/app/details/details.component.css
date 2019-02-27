@@ -1,0 +1,77 @@
+kendo-arcgauge{
+    width: 150px;
+    height: 150px;
+    padding-top: 0;
+  }
+  mat-grid-tile{
+      vertical-align: top;
+  }
+#names {
+    padding-bottom: 0;
+  }
+
+.history {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .history td {
+    padding: 0;
+    vertical-align: bottom;
+  }
+  .history td.spark {
+    line-height: 20px;
+  }
+  .history td.value {
+    font-size: 1.6em;
+    font-weight: normal;
+  
+  }
+  .history td.value span {
+    font-size: .5em;
+    vertical-align: top;
+  
+  }
+  .history td.item {
+    font-size: 1em;
+    font-weight: normal;
+  
+  }
+  
+  .live td.gauge {
+    padding-bottom: 0;
+    
+  }
+  .live{
+    border-collapse: collapse;
+    width: 100%;
+   
+  }
+  .live td{
+    padding: 0;
+    vertical-align: bottom;
+    
+  }
+  .live td.value {
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+  
+  }
+  td{
+    padding: 0;
+  }
+  .live td.value span {
+    font-size: .5em;
+    vertical-align: top;
+  
+  }
+  .title-center {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  #row{
+    flex: 1 1 auto;
+    align-content: center;
+  }
+  
+  
